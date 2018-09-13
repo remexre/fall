@@ -1,0 +1,42 @@
+use cst::*;
+
+#[LALR]
+grammar;
+
+Separated<Item, Sep, T>: Vec<T> = {
+    <i:Separated<Item, Sep, T>> Sep <l:Item> => {
+        let mut i = i;
+        i.push(l);
+        i
+    },
+    Item => vec![<>],
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Atom: String = {
+    r"[a-z.][A-Za-z_.]*" => <>.to_string(),
+    <s:r"'[^']*'"> => s[1..s.len()-1].to_string(),
+    <s:r#""[^"]*""#> => s[1..s.len()-1].to_string(),
+};
+
+pub Clause: Clause = {
+    <h:Lit> "." => Clause(h, vec![]),
+    <h:Lit> ":-" <t:Separated<Lit, ",", Lit>> "." => Clause(h, t),
+};
+
+pub Lit: Lit = {
+    Atom => Lit(<>, vec![]),
+    <a:Atom> "(" <ts:Separated<Term, ",", Term>> ")" => Lit(a, ts),
+};
+
+pub Rules: Rules = {
+    Clause* => Rules(<>),
+};
+
+pub Term: Term = {
+    "_"                 => Term::Any,
+    Lit                 => Term::Lit(<>),
+    r"[0-9]+"           => Term::Num(<>.parse().unwrap()),
+    r"[A-Z_][a-zA-Z_]*" => Term::Var(<>.to_string()),
+};

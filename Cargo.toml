@@ -1,0 +1,20 @@
+[package]
+authors = ["Nathan Ringo <remexre@gmail.com>"]
+description = "An easily embeddable, futures-friendly logic engine."
+documentation = "https://docs.rs/fall"
+license = "Apache-2.0/MIT"
+name = "fall"
+readme = "README.md"
+repository = "https://github.com/remexre/fall"
+version = "0.1.0"
+
+[dependencies]
+failure = "0.1.2"
+frunk = "0.2.0"
+futures = "0.1.24"
+lalrpop-util = "0.16.0"
+lazy_static = "1.1.0"
+regex = "1.0.5"
+
+[build-dependencies]
+lalrpop = "0.16.0"
