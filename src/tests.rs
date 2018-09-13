@@ -1,6 +1,11 @@
 use std::collections::HashSet;
+use std::sync::Arc;
 
-use super::*;
+use futures::prelude::*;
+
+use ast::{Lit, Rules, Term};
+use cst;
+use eval::Env;
 use util::gensym;
 
 #[test]
