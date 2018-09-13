@@ -22,13 +22,14 @@ pub(crate) mod cst;
 mod errors;
 mod eval;
 mod unify;
-mod util;
+pub mod util;
 
 #[cfg(test)]
 mod tests;
 
 lalrpop_mod!(grammar);
 
-pub use ast::*;
+pub use ast::{Clause, Lit, Rules, Term};
 pub use errors::{LoadError, ResolutionError};
 pub use eval::Env;
+pub use unify::Subst;

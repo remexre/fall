@@ -1,3 +1,5 @@
+//! Miscellaneous utilities.
+
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 use futures::Stream;
