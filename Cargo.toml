@@ -6,7 +6,7 @@ license = "Apache-2.0/MIT"
 name = "fall"
 readme = "README.md"
 repository = "https://github.com/remexre/fall"
-version = "0.1.1"
+version = "0.1.2"
 
 [dependencies]
 failure = "0.1.2"

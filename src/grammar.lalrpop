@@ -15,7 +15,7 @@ Separated<Item, Sep, T>: Vec<T> = {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Atom: String = {
-    r"[a-z.][A-Za-z_.]*" => <>.to_string(),
+    r"[a-z.][A-Za-z0-9_.]*" => <>.to_string(),
     <s:r"'[^']*'"> => s[1..s.len()-1].to_string(),
     <s:r#""[^"]*""#> => s[1..s.len()-1].to_string(),
 };
@@ -35,8 +35,8 @@ pub Rules: Rules = {
 };
 
 pub Term: Term = {
-    "_"                 => Term::Any,
-    Lit                 => Term::Lit(<>),
-    r"[0-9]+"           => Term::Num(<>.parse().unwrap()),
-    r"[A-Z_][a-zA-Z_]*" => Term::Var(<>.to_string()),
+    "_"                       => Term::Any,
+    Lit                       => Term::Lit(<>),
+    r"[0-9]+"                 => Term::Num(<>.parse().unwrap()),
+    r"[A-Z_][A-Za-z0-9_]*" => Term::Var(<>.to_string()),
 };
