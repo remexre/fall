@@ -1,14 +1,22 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
+#[cfg(feature = "parser")]
+use std::collections::HashSet;
 use std::fmt::{Display, Formatter, Result as FmtResult};
+#[cfg(feature = "parser")]
 use std::fs::File;
+#[cfg(feature = "parser")]
 use std::io::Read;
+#[cfg(feature = "parser")]
 use std::path::Path;
+#[cfg(feature = "parser")]
 use std::str::FromStr;
 use std::sync::Arc;
 
 use regex::Regex;
 
+#[cfg(feature = "parser")]
 use cst;
+#[cfg(feature = "parser")]
 use errors::LoadError;
 use util::gensym;
 
@@ -18,6 +26,7 @@ pub struct Rules(pub Vec<Clause>);
 
 impl Rules {
     /// Loads from a file.
+    #[cfg(feature = "parser")]
     pub fn load_from(path: impl AsRef<Path>) -> Result<Rules, LoadError> {
         let src = {
             let mut f = File::open(path).map_err(LoadError::Io)?;
@@ -29,6 +38,7 @@ impl Rules {
     }
 }
 
+#[cfg(feature = "parser")]
 impl FromStr for Rules {
     type Err = <cst::Rules as FromStr>::Err;
     fn from_str(src: &str) -> Result<Rules, Self::Err> {

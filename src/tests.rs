@@ -1,13 +1,21 @@
+#[cfg(feature = "parser")]
 use std::collections::HashSet;
+#[cfg(feature = "parser")]
 use std::sync::Arc;
 
+#[cfg(feature = "parser")]
 use futures::prelude::*;
 
+#[cfg(feature = "parser")]
 use ast::{Lit, Rules, Term};
+#[cfg(feature = "parser")]
 use cst;
+#[cfg(feature = "parser")]
 use eval::Env;
+#[cfg(feature = "parser")]
 use util::gensym;
 
+#[cfg(feature = "parser")]
 #[test]
 fn execution() {
     let rules = r#"
@@ -43,6 +51,7 @@ fn execution() {
     assert_eq!(results, expected);
 }
 
+#[cfg(feature = "parser")]
 #[test]
 fn parse_terms() {
     assert_eq!(

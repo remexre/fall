@@ -1,8 +1,11 @@
+#[cfg(feature = "parser")]
 use std::fmt::{Display, Formatter, Result as FmtResult};
 
+#[cfg(feature = "parser")]
 use cst::ParseError;
 
 /// An error loading a file.
+#[cfg(feature = "parser")]
 #[derive(Debug, Fail)]
 pub enum LoadError {
     /// An error reading the file.
@@ -12,6 +15,7 @@ pub enum LoadError {
     Parse(ParseError),
 }
 
+#[cfg(feature = "parser")]
 impl Display for LoadError {
     fn fmt(&self, fmt: &mut Formatter) -> FmtResult {
         match *self {
@@ -25,7 +29,11 @@ impl Display for LoadError {
 #[derive(Debug, Fail)]
 pub enum ResolutionError {
     /// A variable was passed where a literal was required. Reordering goals may fix this.
-    #[fail(display = "Insufficiently instantiated arguments to {}/{}", _0, _1)]
+    #[fail(
+        display = "Insufficiently instantiated arguments to {}/{}",
+        _0,
+        _1
+    )]
     InsufficientlyInstantiatedArgs(&'static str, usize),
 
     /// A value of the wrong type was passed.

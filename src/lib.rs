@@ -11,6 +11,7 @@
 extern crate failure;
 extern crate frunk;
 extern crate futures;
+#[cfg(feature = "parser")]
 #[macro_use]
 extern crate lalrpop_util;
 #[macro_use]
@@ -18,6 +19,7 @@ extern crate lazy_static;
 extern crate regex;
 
 mod ast;
+#[cfg(feature = "parser")]
 pub(crate) mod cst;
 mod errors;
 mod eval;
@@ -27,9 +29,12 @@ pub mod util;
 #[cfg(test)]
 mod tests;
 
+#[cfg(feature = "parser")]
 lalrpop_mod!(grammar);
 
 pub use ast::{Clause, Lit, Rules, Term};
-pub use errors::{LoadError, ResolutionError};
+#[cfg(feature = "parser")]
+pub use errors::LoadError;
+pub use errors::ResolutionError;
 pub use eval::Env;
 pub use unify::Subst;
